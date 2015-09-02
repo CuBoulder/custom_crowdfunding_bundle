@@ -3,3 +3,4 @@ description = Custom module for Crowdfunding
 core = 7.x
 
 dependencies[] = community_funded
+dependencies[] = context_query_param
