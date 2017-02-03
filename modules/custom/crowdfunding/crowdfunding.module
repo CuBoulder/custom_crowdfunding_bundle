@@ -7,23 +7,11 @@
  */
 function express_crowdfunding_secure_permissions($role) {
   $permissions = array(
-    'anonymous user' => array(
-
-    ),
-    'authenticated user' => array(
-
-    ),
     'administrator' => array(
       'administer community funded',
     ),
-    'content_editor' => array(
-
-    ),
     'developer' => array(
       'administer community funded',
-    ),
-    'edit_my_content' => array(
-
     ),
     'site_owner' => array(
       'administer community funded',
