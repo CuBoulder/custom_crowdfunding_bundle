@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall Crowdfunded module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function crowdfunding_uninstall() {
+  // Delete data user variable.
+  variable_del('community_funded_data_user');
+  variable_del('community_funded_domain_match');
+}
