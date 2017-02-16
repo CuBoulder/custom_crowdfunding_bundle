@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall Crowdfunded module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function crowdfunding_uninstall() {
+  // Delete data user variable.
+  variable_del('community_funded_data_user');
+  variable_del('community_funded_domain_match');
+}
+
+/**
+ * Implements hook_update_N().
+ * updates community_funded configurations to use CU info.
+ */
+function crowdfunding_install() {
+  variable_set(community_funded_data_user, 'is4V1TA0437HddVdKg7LpR6ebsJJ0m6klrjelRSOhkeYqAo7Px9BUHEoA+1qxhWrqdMLD/5uOCX2YjgJ0j773PQPConqTDY8OZglcy8l8Kkf5m0R6zIiEhSjw7LWdBn8G3nMB8y6OKtMkMXDPXU8o7pmMdiUEpkHxqiPp7meXXE=');
+  variable_set(community_funded_domain_match, 'http://www.colorado.edu');
+}

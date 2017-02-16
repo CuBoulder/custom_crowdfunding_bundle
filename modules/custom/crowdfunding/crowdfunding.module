@@ -1,1 +1,24 @@
 <?php
+
+/**
+ * Implements hook_secure_permissions().
+ *
+ * Adding permissions for Express Crowdfunding.
+ */
+function crowdfunding_secure_permissions($role) {
+  $permissions = array(
+    'administrator' => array(
+      'administer community funded',
+    ),
+    'developer' => array(
+      'administer community funded',
+    ),
+    'site_owner' => array(
+      'administer community funded',
+    ),
+  );
+
+  if (isset($permissions[$role])) {
+    return $permissions[$role];
+  }
+}
