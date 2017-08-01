@@ -1,0 +1,10 @@
+name = Community Funded
+description = Enables project-specific social media meta tags on your EmpoweredBy CF project pages.
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2017-02-13
+version = "7.x-1.2"
+core = "7.x"
+project = "community_funded"
+datestamp = "1487002690"
+
