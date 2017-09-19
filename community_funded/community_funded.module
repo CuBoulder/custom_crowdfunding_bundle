@@ -68,7 +68,7 @@ function community_funded_block_view($delta = '') {
     case 'community_funded':
       $block['subject'] = t('Community Funded');
       $block['content'] = array(
-        '#markup' => '<div id="empowered-by-cf" data-user="' . check_plain(variable_get('community_funded_data_user', 'No data user set.')) . '">Currently empty</div>',
+        '#markup' => '<div id="empowered-by-cf" data-user="' . check_plain(variable_get('community_funded_data_user', 'No data user set.')) . '">Loading...</div>',
         '#attached' => array(
           'css' => array(
             drupal_get_path('module', 'community_funded') . "/css/community_funded.css",
