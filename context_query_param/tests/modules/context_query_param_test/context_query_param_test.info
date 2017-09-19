@@ -1,0 +1,6 @@
+name = Context Query Parameter Test
+description = Test module for Context Query Parameter, do not enable.
+package = Context
+core = 7.x
+dependencies[] = context_query_param
+hidden = TRUE

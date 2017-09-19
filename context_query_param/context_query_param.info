@@ -1,0 +1,7 @@
+name = Context Query Parameters
+description = Introduces a query parameter context condition.
+package = "Context"
+core = 7.x
+dependencies[] = context
+
+files[] = tests/context_query_param.test
