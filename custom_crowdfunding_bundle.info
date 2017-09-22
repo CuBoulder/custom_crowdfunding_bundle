@@ -1,6 +1,9 @@
 name = Crowdfunding
-description = Custom module for Crowdfunding
+description = Custom module for Community Funded.
 core = 7.x
+version = 7.x-1.1
 
 dependencies[] = community_funded
 dependencies[] = context_query_param
+
+bundle_group = "addon_bundles"

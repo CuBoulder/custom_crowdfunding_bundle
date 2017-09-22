@@ -5,7 +5,7 @@
  *
  * Adding permissions for Express Crowdfunding.
  */
-function crowdfunding_secure_permissions($role) {
+function custom_crowdfunding_bundle_secure_permissions($role) {
   $permissions = array(
     'administrator' => array(
       'administer community funded',

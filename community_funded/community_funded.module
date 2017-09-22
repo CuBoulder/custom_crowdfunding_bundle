@@ -1,0 +1,130 @@
+<?php
+
+/**
+ * @file
+ * Builds out block and permissions for Community Funded campaigns.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function community_funded_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#community_funded":
+      $output  = '<h3>' . t('Usage') . '</h3>';
+      $output .= '<p>' . t('Make sure this module is enabled for proper meta tag settings on EmpoweredBy CF Project Pages.') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function community_funded_menu() {
+  $items = array();
+
+  $items['admin/config/system/community-funded'] = array(
+    'title' => 'Community Funded Configuration',
+    'description' => 'Configure community funded information.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('community_funded_admin_settings_form'),
+    'access arguments' => array('administer community funded'),
+    'file' => 'community_funded.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function community_funded_permission() {
+  return array(
+    'administer community funded' => array(
+      'title' => t('Administer Community Funded'),
+      'description' => t('Administer Community Funded configuration.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function community_funded_block_info() {
+  $blocks['community_funded'] = array(
+    'info' => t('Community Funded'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function community_funded_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'community_funded':
+      $block['subject'] = t('Community Funded');
+      $block['content'] = array(
+        '#markup' => '<div id="empowered-by-cf" data-user="' . check_plain(variable_get('community_funded_data_user', 'No data user set.')) . '">Loading...</div>',
+        '#attached' => array(
+          'css' => array(
+            drupal_get_path('module', 'community_funded') . "/css/community_funded.css",
+          ),
+        ),
+      );
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_init().
+ *
+ * Project IDs are added at the end of the URL--this checks the site domain ($data['site_name'])
+ * against the domain name added in the block configuration page (admin/config/system/community-funded).
+ * If you don't want to check, remove or comment out the entire hook_init() below.
+ *
+ * If this is successful, the JS will be loaded. If it fails, no JS and you get a Page Not Found error.
+ */
+function community_funded_init() {
+  $site_info_block_domain = variable_get('community_funded_domain_match', '');
+
+  $params = drupal_get_query_parameters();
+
+  if (isset($params)) {
+
+    if (is_array($params)
+      && isset($params['cfpage']) && $params['cfpage'] == 'project'
+      && ($project_id = $params['project_id']) && !empty($params['project_id'])
+    ) {
+
+      // drupal_http_request() does not support protocol relative urls.
+      if (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') {
+        $protocol = 'https://';
+      } else {
+        $protocol = 'http://';
+      }
+
+      $response = drupal_http_request($protocol . 'campaigns.communityfunded.com/ebcf_ogtags.php?project_id=' . $project_id);
+
+      $data = drupal_json_decode($response->data);
+
+      // If this is successful, the JS will be loaded. If it fails, no JS and you get a Page Not Found error.
+      if ($data['site_name'] == $site_info_block_domain || !isset($params)) {
+        $mod_path = drupal_get_path('module', 'community_funded');
+        drupal_add_js($mod_path . '/js/collaborate.js', array('type' => 'file', 'scope' => 'footer'));
+      } else {
+        drupal_set_message('Project was not found for this site.', 'error', FALSE);
+        drupal_deliver_page(MENU_NOT_FOUND);;
+      }
+      dpm($params);
+    } else {
+      $mod_path = drupal_get_path('module', 'community_funded');
+      drupal_add_js($mod_path . '/js/collaborate.js', array('type' => 'file', 'scope' => 'footer'));
+    }
+  }
+}
+
