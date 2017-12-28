@@ -120,7 +120,6 @@ function community_funded_init() {
         drupal_set_message('Project was not found for this site.', 'error', FALSE);
         drupal_deliver_page(MENU_NOT_FOUND);;
       }
-      dpm($params);
     } else {
       $mod_path = drupal_get_path('module', 'community_funded');
       drupal_add_js($mod_path . '/js/collaborate.js', array('type' => 'file', 'scope' => 'footer'));
