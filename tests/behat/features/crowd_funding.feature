@@ -10,7 +10,6 @@ Scenario: An authenticated user should be able to access the form for adding a c
     When I go to "admin/module"
     Then I should see "Crowdfunding"
 
-
 Scenario: An anonymous user should not be able to access the form for adding a class note
     When I am on "admin/module"
     Then I should see "Access denied"
