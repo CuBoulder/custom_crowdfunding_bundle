@@ -1,9 +1,9 @@
 @crowd_funding
 Feature: Crowd Funding
 
-When I login to a Web Express website
-As an authenticated user with the right permission
-I should be able to god only knows what this does
+When Crowdfunding is enabled on a Web Express site
+As user
+I should be able to view the list of projects that are being crowdfunded by CU Boulder
 
 # NOT SURE EXACTLY HOW TO TEST; BELOW ARE SOME OF THE THINGS THAT HAPPEN WHEN THE BUNDLE IS ENABLED
 
