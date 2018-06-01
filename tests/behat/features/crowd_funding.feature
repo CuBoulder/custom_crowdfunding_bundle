@@ -11,6 +11,11 @@ Scenario: The Crowdfunding module has been added to the module list
     Given I am logged in as a user with the "developer" role
     When I go to "admin/module"
     Then I should see "Crowdfunding"
+ 
+Scenario: The Crowdfunding Settings have been added to Configuration list
+    Given I am logged in as a user with the "developer" role
+    When I go to "admin/config"
+    Then I should see "Community Funded Configuration"
     
 Scenario: The block 'Community Funded' shows up in list of available blocks on Context
   Given I am logged in as a user with the "developer" role
