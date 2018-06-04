@@ -13,6 +13,9 @@ function custom_crowdfunding_bundle_secure_permissions($role) {
     'developer' => array(
       'administer community funded',
     ),
+    'site_editor' => array(
+      'administer community funded',
+    ),
     'site_owner' => array(
       'administer community funded',
     ),
